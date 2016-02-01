@@ -1,16 +1,19 @@
 
 package org.usfirst.frc.team3946.robot;
 
+import org.usfirst.frc.team3946.robot.commands.AutoDriveTest;
 import org.usfirst.frc.team3946.robot.subsystems.CatapultPositioner;
 import org.usfirst.frc.team3946.robot.subsystems.DriveTrainEncoder;
 import org.usfirst.frc.team3946.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3946.robot.subsystems.IntakePositioner;
 import org.usfirst.frc.team3946.robot.subsystems.LaunchLatch;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,12 +30,14 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drivetrain drivetrain = new Drivetrain();
 	public static DriveTrainEncoder driveTrainEncoder = new DriveTrainEncoder();
+    public static AnalogGyro gyro = new AnalogGyro(1);
 	public static IntakePositioner intakePositioner = new IntakePositioner();
 	public static LaunchLatch launchLatch = new LaunchLatch();
 	public static CatapultPositioner catapultPositioner = new CatapultPositioner();
 	public static Compressor compressor = new Compressor(0);
     Command autonomousCommand;
     SendableChooser chooser;
+
 
     /**
      * This function is run when the robot is first started up and should be
@@ -42,6 +47,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		driveTrainEncoder.initEncoders();
         chooser = new SendableChooser();
+        gyro = new AnalogGyro(1);
         SmartDashboard.putData("Auto mode", chooser);
     }
 	
@@ -68,7 +74,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+        autonomousCommand = (AutoDriveTest) chooser.getSelected();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {

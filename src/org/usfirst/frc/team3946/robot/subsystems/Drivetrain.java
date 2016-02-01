@@ -2,6 +2,7 @@ package org.usfirst.frc.team3946.robot.subsystems;
 
 
 import org.usfirst.frc.team3946.robot.RobotMap;
+import org.usfirst.frc.team3946.robot.commands.AutoDriveTest;
 import org.usfirst.frc.team3946.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.CANTalon;
