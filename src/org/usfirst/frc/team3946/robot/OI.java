@@ -31,9 +31,12 @@ public class OI {
     //Intake
     	Button lowerIntake = new JoystickButton(driveController, XboxController.X);
     	Button raiseIntake = new JoystickButton(driveController, XboxController.Y);
-    		lowerIntake.whileActive(new LowerIntake());
-    		raiseIntake.whileActive(new RaiseIntake());
-    	
+    	Button ballPickupForward = new JoystickButton(driveController, XboxController.RightTrigger);
+    	Button ballPickupReverse = new JoystickButton(driveController, XboxController.LeftTrigger);
+		lowerIntake.whileActive(new LowerIntake());
+		raiseIntake.whileActive(new RaiseIntake());
+		ballPickupForward.whileActive(new BallPickupForward());
+		ballPickupReverse.whileActive(new BallPickupReverse());
     }
 }
 
