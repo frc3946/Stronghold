@@ -23,15 +23,8 @@ public class ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.robotDrive.arcadeDrive(Robot.oi.driveController);
-    	SmartDashboard.putNumber("Actual Right Speed", Robot.driveTrainEncoder.getRightRate());
-    	SmartDashboard.putNumber("Actual Right Distance", Robot.driveTrainEncoder.getRightDistance());
-    	SmartDashboard.putNumber("Range Finder", Robot.ballFinder.getVoltage());
-    	SmartDashboard.putNumber("Gyro", Robot.gyro.getAngle());
-    	SmartDashboard.putNumber("Actual Left Speed", Robot.driveTrainEncoder.getLeftRate());
-    	SmartDashboard.putNumber("Actual Left Distance", Robot.driveTrainEncoder.getLeftDistance());
-    	
-    	}
+    	Robot.drivetrain.robotDrive.arcadeDrive(Robot.oi.driveController);    	
+    }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

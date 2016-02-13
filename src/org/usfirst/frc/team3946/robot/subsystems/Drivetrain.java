@@ -43,7 +43,4 @@ public class Drivetrain extends Subsystem {
     	bLeft.set(speedLeft);
     }
     
-    public void DriveStraight(double speed){
-    	
-    }
 }

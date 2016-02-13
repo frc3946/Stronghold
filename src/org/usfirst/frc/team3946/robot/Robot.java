@@ -11,10 +11,12 @@ import org.usfirst.frc.team3946.robot.subsystems.LaunchLatch;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -39,6 +41,7 @@ public class Robot extends IterativeRobot {
 	public static LaunchLatch launchLatch = new LaunchLatch();
 	public static CatapultPositioner catapultPositioner = new CatapultPositioner();
 	public static Compressor compressor = new Compressor(0);
+	public static Accelerometer accel = new BuiltInAccelerometer();
     Command autonomousCommand;
     SendableChooser chooser;
 
@@ -115,6 +118,15 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+    	SmartDashboard.putNumber("Actual Right Speed", Robot.driveTrainEncoder.getRightRate());
+    	SmartDashboard.putNumber("Actual Right Distance", Robot.driveTrainEncoder.getRightDistance());
+    	SmartDashboard.putNumber("Range Finder", Robot.ballFinder.getVoltage());
+    	SmartDashboard.putNumber("Gyro", Robot.gyro.getAngle());
+    	SmartDashboard.putNumber("Actual Left Speed", Robot.driveTrainEncoder.getLeftRate());
+    	SmartDashboard.putNumber("Actual Left Distance", Robot.driveTrainEncoder.getLeftDistance());
+    	SmartDashboard.putNumber("Accel X Value", Robot.accel.getX());
+    	SmartDashboard.putNumber("Accel Y Value", Robot.accel.getY());
+    	SmartDashboard.putNumber("Accel Z Value", Robot.accel.getZ());
     }
     
     /**

@@ -51,5 +51,14 @@ public class DriveTrainEncoder extends Subsystem {
     	
     }
     
+    public double getAverageDistance(){
+    	return (getLeftDistance() + getRightDistance()) / 2;
+    }
+    
+    public void resetEncoders(){
+    	leftWheelEncoder.reset();
+    	rightWheelEncoder.reset();
+    }
+    
 } //end of DriveTrainEncoder class
 
