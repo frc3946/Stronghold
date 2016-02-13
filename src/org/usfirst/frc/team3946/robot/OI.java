@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3946.robot;
 
 import org.usfirst.frc.team3946.robot.commands.BallPickupForward;
-
+import org.usfirst.frc.team3946.robot.commands.BallPickupReverse;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -11,8 +11,6 @@ import org.usfirst.frc.team3946.robot.commands.PosCatForLaunch;
 import org.usfirst.frc.team3946.robot.commands.PosCatForLoad;
 import org.usfirst.frc.team3946.robot.commands.RaiseIntake;
 
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import libraries.XboxController;
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,11 +19,18 @@ import libraries.XboxController;
 public class OI {
 	
 	public XboxController driveController = new XboxController(0);
+	
+//	A - position catapult for launch
+//	B - position catapult for loading
+//	X - lwoer intake device
+//	Y - raise intake device
+//	LeftBumper
+//	RightBumper - launch ball
+//	LeftTrigger - runs intake wheels out
+//	RightTrigger - runs intake wheels in
     
     public OI() {
     	driveController.setDeadband(0.2);
-    	Button ballPickupForward = new JoystickButton(driveController, XboxController.A);
-    	ballPickupForward.whenPressed(new BallPickupForward());
     	
     //Catapult
     	Button launch = new JoystickButton(driveController, XboxController.RightBumper);
