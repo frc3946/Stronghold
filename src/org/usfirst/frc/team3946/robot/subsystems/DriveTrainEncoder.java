@@ -21,13 +21,13 @@ public class DriveTrainEncoder extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     } //end of initDefaultCommand method
     public void initEncoders(){
-    	rightWheelEncoder.setDistancePerPulse(1); // feet /ticks
+    	//6'11"=83 inches per 3430 ticks
+    	rightWheelEncoder.setDistancePerPulse(-83.0/3430.0); // in /ticks
     	rightWheelEncoder.setMinRate(.1);
     	rightWheelEncoder.setSamplesToAverage(7);
-    	leftWheelEncoder.setDistancePerPulse(1); // feet /ticks
+    	leftWheelEncoder.setDistancePerPulse(83.0/3430.0); // in /ticks
     	leftWheelEncoder.setMinRate(.1);
     	leftWheelEncoder.setSamplesToAverage(7);
-    	
     }
     
     public double getRightDistance()

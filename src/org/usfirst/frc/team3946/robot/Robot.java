@@ -2,6 +2,7 @@
 package org.usfirst.frc.team3946.robot;
 
 import org.usfirst.frc.team3946.robot.commands.AutoDriveTest;
+import org.usfirst.frc.team3946.robot.subsystems.BallPickup;
 import org.usfirst.frc.team3946.robot.subsystems.CatapultPositioner;
 import org.usfirst.frc.team3946.robot.subsystems.DriveTrainEncoder;
 import org.usfirst.frc.team3946.robot.subsystems.Drivetrain;
@@ -9,6 +10,7 @@ import org.usfirst.frc.team3946.robot.subsystems.IntakePositioner;
 import org.usfirst.frc.team3946.robot.subsystems.LaunchLatch;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -31,6 +33,8 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain drivetrain = new Drivetrain();
 	public static DriveTrainEncoder driveTrainEncoder = new DriveTrainEncoder();
     public static AnalogGyro gyro = new AnalogGyro(1);
+	public static AnalogInput ballFinder = new AnalogInput(3);
+	public static BallPickup ballPickup = new BallPickup();
 	public static IntakePositioner intakePositioner = new IntakePositioner();
 	public static LaunchLatch launchLatch = new LaunchLatch();
 	public static CatapultPositioner catapultPositioner = new CatapultPositioner();
@@ -47,7 +51,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		driveTrainEncoder.initEncoders();
         chooser = new SendableChooser();
-        gyro = new AnalogGyro(1);
+
         SmartDashboard.putData("Auto mode", chooser);
     }
 	
