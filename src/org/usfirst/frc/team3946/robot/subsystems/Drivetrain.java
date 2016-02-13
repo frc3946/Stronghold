@@ -3,14 +3,9 @@ package org.usfirst.frc.team3946.robot.subsystems;
 
 import org.usfirst.frc.team3946.robot.RobotMap;
 import org.usfirst.frc.team3946.robot.commands.ArcadeDrive;
-import org.usfirst.frc.team3946.robot.commands.AutoDriveTest;
-import org.usfirst.frc.team3946.robot.commands.TankDrive;
-
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**

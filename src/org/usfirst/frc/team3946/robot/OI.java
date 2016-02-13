@@ -36,19 +36,19 @@ public class OI {
     	Button launch = new JoystickButton(driveController, XboxController.RightBumper);
     	Button posCatForLaunch = new JoystickButton(driveController, XboxController.B);
     	Button posCatForLoad = new JoystickButton(driveController, XboxController.A);
-    		launch.whileActive(new Launch());
-    		posCatForLaunch.whileActive(new PosCatForLaunch());
-    		posCatForLoad.whileActive(new PosCatForLoad());
+    	launch.whileActive(new Launch());
+    	posCatForLaunch.whileActive(new PosCatForLaunch());
+    	posCatForLoad.whileActive(new PosCatForLoad());
     		
     //Intake
-    	Button lowerIntake = new JoystickButton(driveController, XboxController.X);
-    	Button raiseIntake = new JoystickButton(driveController, XboxController.Y);
-    	Button ballPickupForward = new JoystickButton(driveController, XboxController.RightTrigger);
-    	Button ballPickupReverse = new JoystickButton(driveController, XboxController.LeftTrigger);
-			lowerIntake.whileActive(new LowerIntake());
-			raiseIntake.whileActive(new RaiseIntake());
-			ballPickupForward.whileActive(new BallPickupForward());
-			ballPickupReverse.whileActive(new BallPickupReverse());
+    	Button lowerIntake = new JoystickButton(driveController, XboxController.Start);
+    	Button raiseIntake = new JoystickButton(driveController, XboxController.Back);
+    	Button ballPickupForward = new JoystickButton(driveController, XboxController.X);
+    	Button ballPickupReverse = new JoystickButton(driveController, XboxController.Y);
+		lowerIntake.whileActive(new LowerIntake());
+		raiseIntake.whileActive(new RaiseIntake());
+		ballPickupForward.whileActive(new BallPickupForward());
+		ballPickupReverse.whileActive(new BallPickupReverse());
     }
 }
 

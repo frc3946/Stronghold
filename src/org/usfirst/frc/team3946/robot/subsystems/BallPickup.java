@@ -4,13 +4,14 @@ import org.usfirst.frc.team3946.robot.RobotMap;
 import org.usfirst.frc.team3946.robot.commands.BallPickupStop;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class BallPickup extends Subsystem {
-	  public CANTalon ballPickup = new CANTalon(RobotMap.ballPickupTalon);
+	  public Talon ballPickup = new Talon(RobotMap.ballPickupTalon);
 	  double ballPickupSpeed = 1.0;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
