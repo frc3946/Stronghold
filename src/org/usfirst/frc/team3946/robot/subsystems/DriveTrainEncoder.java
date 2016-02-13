@@ -14,25 +14,40 @@ public class DriveTrainEncoder extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	Encoder rightWheelEncoder = new Encoder(RobotMap.rightWheelEncoderA, RobotMap.rightWheelEncoderB, true, EncodingType.k4X);
-    public void initDefaultCommand() {
+    Encoder leftWheelEncoder = new Encoder(RobotMap.leftWheelEncoderA, RobotMap.leftWheelEncoderB, true, EncodingType.k4X);
+    
+	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     } //end of initDefaultCommand method
     public void initEncoders(){
-    	rightWheelEncoder.setDistancePerPulse(1); // feet /ticks
+    	//6'11"=83 inches per 3430 ticks
+    	rightWheelEncoder.setDistancePerPulse(-83.0/3430.0); // in /ticks
     	rightWheelEncoder.setMinRate(.1);
     	rightWheelEncoder.setSamplesToAverage(7);
-    	
+    	leftWheelEncoder.setDistancePerPulse(83.0/3430.0); // in /ticks
+    	leftWheelEncoder.setMinRate(.1);
+    	leftWheelEncoder.setSamplesToAverage(7);
     }
     
-    public double getDistance()
+    public double getRightDistance()
     {
     	return rightWheelEncoder.getDistance();
     }
     
-    public double getRate()
+    public double getRightRate()
     {
     	return rightWheelEncoder.getRate();
+    	
+    }
+    public double getLeftDistance()
+    {
+    	return leftWheelEncoder.getDistance();
+    }
+    
+    public double getLeftRate()
+    {
+    	return leftWheelEncoder.getRate();
     	
     }
     

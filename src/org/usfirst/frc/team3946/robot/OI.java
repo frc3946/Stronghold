@@ -1,5 +1,10 @@
 package org.usfirst.frc.team3946.robot;
 
+import org.usfirst.frc.team3946.robot.commands.BallPickupForward;
+
+
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team3946.robot.commands.Launch;
 import org.usfirst.frc.team3946.robot.commands.LowerIntake;
 import org.usfirst.frc.team3946.robot.commands.PosCatForLaunch;
@@ -19,6 +24,8 @@ public class OI {
     
     public OI() {
     	driveController.setDeadband(0.2);
+    	Button ballPickupForward = new JoystickButton(driveController, XboxController.A);
+    	ballPickupForward.whenPressed(new BallPickupForward());
     	
     //Catapult
     	Button launch = new JoystickButton(driveController, XboxController.RightBumper);

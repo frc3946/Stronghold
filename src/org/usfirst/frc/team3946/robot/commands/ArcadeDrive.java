@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3946.robot.commands;
 
 import org.usfirst.frc.team3946.robot.Robot;
+import org.usfirst.frc.team3946.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -8,9 +9,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class TankDrive extends Command {
+public class ArcadeDrive extends Command {
 
-    public TankDrive() {
+	
+    public ArcadeDrive() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
     }
@@ -21,17 +23,15 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double leftStick = Robot.oi.driveController.getLeftStickY();
-    	double rightStick = Robot.oi.driveController.getRightStickY();
-    	Robot.drivetrain.Drive(leftStick, rightStick);
-    	
+    	Robot.drivetrain.robotDrive.arcadeDrive(Robot.oi.driveController);
     	SmartDashboard.putNumber("Actual Right Speed", Robot.driveTrainEncoder.getRightRate());
     	SmartDashboard.putNumber("Actual Right Distance", Robot.driveTrainEncoder.getRightDistance());
-    	
+    	SmartDashboard.putNumber("Range Finder", Robot.ballFinder.getVoltage());
+    	SmartDashboard.putNumber("Gyro", Robot.gyro.getAngle());
     	SmartDashboard.putNumber("Actual Left Speed", Robot.driveTrainEncoder.getLeftRate());
     	SmartDashboard.putNumber("Actual Left Distance", Robot.driveTrainEncoder.getLeftDistance());
-
-    }
+    	
+    	}
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
@@ -47,13 +47,3 @@ public class TankDrive extends Command {
     protected void interrupted() {
     }
 }
-
-
-
-//public void log() {
-//	SmartDashboard.putBoolean("Low Gear?", slow);
-//	SmartDashboard.putData("Raw Left Encoder", leftEncoder);
-//	SmartDashboard.putData("Raw Right Encoder", rightEncoder);
-//	SmartDashboard.putNumber("Actual Left Speed", leftEncoder.getRate());
-//	SmartDashboard.putNumber("Actual Right Speed", rightEncoder.getRate());
-//}
