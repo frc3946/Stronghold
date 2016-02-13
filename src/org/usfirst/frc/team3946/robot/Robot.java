@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3946.robot;
 
-import org.usfirst.frc.team3946.robot.commands.AutoDriveTest;
 import org.usfirst.frc.team3946.robot.commands.AutoTravel;
 import org.usfirst.frc.team3946.robot.subsystems.BallPickup;
 import org.usfirst.frc.team3946.robot.subsystems.CatapultPositioner;
