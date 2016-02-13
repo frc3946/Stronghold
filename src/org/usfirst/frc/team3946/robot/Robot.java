@@ -127,6 +127,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("Accel X Value", Robot.accel.getX());
     	SmartDashboard.putNumber("Accel Y Value", Robot.accel.getY());
     	SmartDashboard.putNumber("Accel Z Value", Robot.accel.getZ());
+    	SmartDashboard.putNumber("Angle", (Math.atan2(Robot.accel.getY(), Robot.accel.getZ())) * (180 / Math.PI));
     }
     
     /**
