@@ -5,7 +5,6 @@ import org.usfirst.frc.team3946.robot.RobotMap;
 import org.usfirst.frc.team3946.robot.commands.ArcadeDrive;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -25,8 +24,8 @@ public class Drivetrain extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new ArcadeDrive());
-        robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
-        robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
+        //robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
+        //robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
         }
    
     	
