@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LockLatch extends Command {
 
-    public LockLatch() {
+    public LockLatch(double timeout) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.launchLatch);

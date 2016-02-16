@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3946.robot;
 
 import org.usfirst.frc.team3946.robot.commands.AutoTravel;
+import org.usfirst.frc.team3946.robot.commands.LoadPrefNames;
 import org.usfirst.frc.team3946.robot.subsystems.BallPickup;
 import org.usfirst.frc.team3946.robot.subsystems.CatapultPositioner;
 import org.usfirst.frc.team3946.robot.subsystems.DriveTrainEncoder;
@@ -11,8 +12,11 @@ import org.usfirst.frc.team3946.robot.subsystems.LaunchLatch;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
@@ -41,9 +45,15 @@ public class Robot extends IterativeRobot {
 	public static CatapultPositioner catapultPositioner = new CatapultPositioner();
 	public static Compressor compressor = new Compressor(0);
 	public static Accelerometer accel = new BuiltInAccelerometer();
+	public static ThreadedPi threadedpi = new ThreadedPi();
 	Command autonomousCommand;
 	SendableChooser chooser;
-
+	public static double distanceTarget = 130;
+	public static double distanceOffset = 0;
+	double testPref;
+	public static Preferences prefs;
+	public static SendableChooser cameraSelector;
+	static String lastSelected = "";
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -58,6 +68,24 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Position Four", "Position Foue");
 		chooser.addObject("Position Five", "Position Five");
 		SmartDashboard.putData("Auto mode", chooser);
+		prefs = Preferences.getInstance();
+		distanceTarget = prefs.getDouble("DistanceTarget", distanceTarget);
+				//prefs.putDouble("DistanceTarget", 130.0);
+		distanceOffset =  prefs.getDouble("DistanceOffset", distanceOffset);
+				//prefs.putDouble("DistanceOffset", 0.0);
+		//testPref =  prefs.getDouble("TestPref", 11110.0);
+		//prefs.putDouble("TestPrefSave", 11110.0);
+		SmartDashboard.putData("LoadPrefNames", new LoadPrefNames());
+//		CameraServer server = CameraServer.getInstance();
+//		server.setQuality(50);
+//		server.startAutomaticCapture("cam0");
+//		CameraServer server2 = CameraServer.getInstance();
+//		server2.setQuality(50);
+//		server2.startAutomaticCapture("cam1");
+		cameraSelector = new SendableChooser();
+		cameraSelector.addDefault("Front View", "Front");
+		cameraSelector.addObject("Back View", "Back");
+		SmartDashboard.putData("Camera Selector", cameraSelector);
 	}
 
 	/**
@@ -66,6 +94,7 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
 	 */
 	public void disabledInit() {
+		
 
 	}
 
@@ -148,6 +177,32 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Accel Z Value", Robot.accel.getZ());
 		SmartDashboard.putNumber("Angle",
 				(Math.atan2(Robot.accel.getY(), Robot.accel.getZ())) * (180 / Math.PI));
+		updateCamera();
+	}
+	
+	public void updateCamera(){
+		String cameraSelected = SmartDashboard.getString("Camera Selector",
+				"default");
+		if(cameraSelected == lastSelected){
+			return;
+		}
+		switch (cameraSelected) {
+		default:
+		case "Front View":		
+			CameraServer server = CameraServer.getInstance();
+			server.setQuality(50);
+			server.startAutomaticCapture("cam0");
+			lastSelected = "Front View";
+			break;
+		case "Back View":
+			CameraServer server2 = CameraServer.getInstance();			
+			server2.setQuality(50);
+			server2.startAutomaticCapture("cam1");
+			lastSelected = "Back View";
+			break;
+		
+			//break;
+		}
 	}
 
 	/**

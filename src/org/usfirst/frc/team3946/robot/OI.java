@@ -5,11 +5,14 @@ import org.usfirst.frc.team3946.robot.commands.BallPickupReverse;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 import org.usfirst.frc.team3946.robot.commands.Launch;
+import org.usfirst.frc.team3946.robot.commands.LaunchGroup;
 import org.usfirst.frc.team3946.robot.commands.LowerIntake;
 import org.usfirst.frc.team3946.robot.commands.PosCatForLaunch;
 import org.usfirst.frc.team3946.robot.commands.PosCatForLoad;
 import org.usfirst.frc.team3946.robot.commands.RaiseIntake;
+import org.usfirst.frc.team3946.robot.commands.ReadyForLaunch;
 
 import libraries.XboxController;
 /**
@@ -22,7 +25,7 @@ public class OI {
 	
 //	A - position catapult for launch
 //	B - position catapult for loading
-//	X - lwoer intake device
+//	X - lower intake device
 //	Y - raise intake device
 //	LeftBumper
 //	RightBumper - launch ball
@@ -34,11 +37,11 @@ public class OI {
     	
     //Catapult
     	Button launch = new JoystickButton(driveController, XboxController.RightBumper);
-    	Button posCatForLaunch = new JoystickButton(driveController, XboxController.B);
-    	Button posCatForLoad = new JoystickButton(driveController, XboxController.A);
-    	launch.whileActive(new Launch());
-    	posCatForLaunch.whileActive(new PosCatForLaunch());
-    	posCatForLoad.whileActive(new PosCatForLoad());
+    	//Button posCatForLaunch = new JoystickButton(driveController, XboxController.B);
+    	Button readyForLaunch = new JoystickButton(driveController, XboxController.A);
+    	launch.whenPressed(new LaunchGroup());
+    	readyForLaunch.whenPressed(new ReadyForLaunch());
+    	//posCatForLoad.whileActive(new PosCatForLoad());
     		
     //Intake
     	Button lowerIntake = new JoystickButton(driveController, XboxController.Start);

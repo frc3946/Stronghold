@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class PosCatForLaunch extends Command {
 
-    public PosCatForLaunch() {
+    public PosCatForLaunch(double timeout) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.catapultPositioner);

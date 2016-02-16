@@ -17,7 +17,6 @@ public class LaunchLatch extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new LockLatch());
     }
     
     public void lock() {

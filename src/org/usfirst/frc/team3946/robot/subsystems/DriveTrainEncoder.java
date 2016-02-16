@@ -22,10 +22,10 @@ public class DriveTrainEncoder extends Subsystem {
     } //end of initDefaultCommand method
     public void initEncoders(){
     	//6'11"=83 inches per 3430 ticks
-    	rightWheelEncoder.setDistancePerPulse(-83.0/3430.0); // in /ticks
+    	rightWheelEncoder.setDistancePerPulse(-83.0/3430.0); // inches /ticks
     	rightWheelEncoder.setMinRate(.1);
     	rightWheelEncoder.setSamplesToAverage(7);
-    	leftWheelEncoder.setDistancePerPulse(83.0/3430.0); // in /ticks
+    	leftWheelEncoder.setDistancePerPulse(83.0/3430.0); // inches /ticks
     	leftWheelEncoder.setMinRate(.1);
     	leftWheelEncoder.setSamplesToAverage(7);
     }
