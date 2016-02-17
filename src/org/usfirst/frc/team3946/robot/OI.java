@@ -6,6 +6,7 @@ import org.usfirst.frc.team3946.robot.commands.BallPickupReverse;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import org.usfirst.frc.team3946.robot.commands.AutoAim;
 import org.usfirst.frc.team3946.robot.commands.Launch;
 import org.usfirst.frc.team3946.robot.commands.LaunchGroup;
 import org.usfirst.frc.team3946.robot.commands.LowerIntake;
@@ -37,17 +38,19 @@ public class OI {
     	
     //Catapult
     	Button launch = new JoystickButton(driveController, XboxController.RightBumper);
+    	Button autoAim = new JoystickButton(driveController, XboxController.LeftBumper);
     	//Button posCatForLaunch = new JoystickButton(driveController, XboxController.B);
-    	Button readyForLaunch = new JoystickButton(driveController, XboxController.A);
+    	Button readyForLaunch = new JoystickButton(driveController, XboxController.Back);
     	launch.whenPressed(new LaunchGroup());
+    	autoAim.whileHeld(new AutoAim());
     	readyForLaunch.whenPressed(new ReadyForLaunch());
     	//posCatForLoad.whileActive(new PosCatForLoad());
     		
     //Intake
-    	Button lowerIntake = new JoystickButton(driveController, XboxController.Start);
-    	Button raiseIntake = new JoystickButton(driveController, XboxController.Back);
+    	Button lowerIntake = new JoystickButton(driveController, XboxController.B);
+    	Button raiseIntake = new JoystickButton(driveController, XboxController.Y);
     	Button ballPickupForward = new JoystickButton(driveController, XboxController.X);
-    	Button ballPickupReverse = new JoystickButton(driveController, XboxController.Y);
+    	Button ballPickupReverse = new JoystickButton(driveController, XboxController.Start);
 		lowerIntake.whileActive(new LowerIntake());
 		raiseIntake.whileActive(new RaiseIntake());
 		ballPickupForward.whileActive(new BallPickupForward());

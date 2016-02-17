@@ -9,6 +9,9 @@ import org.usfirst.frc.team3946.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3946.robot.subsystems.IntakePositioner;
 import org.usfirst.frc.team3946.robot.subsystems.LaunchLatch;
 
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -54,6 +57,10 @@ public class Robot extends IterativeRobot {
 	public static Preferences prefs;
 	public static SendableChooser cameraSelector;
 	static String lastSelected = "";
+	int currSession;
+	int sessionfront;
+	int sessionback;
+	Image frame;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -65,8 +72,9 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Position One", "Position One");
 		chooser.addObject("Position Two", "Position Two");
 		chooser.addObject("Position Three", "Position Three");
-		chooser.addObject("Position Four", "Position Foue");
+		chooser.addObject("Position Four", "Position Four");
 		chooser.addObject("Position Five", "Position Five");
+		chooser.addObject("Do Nothing", "Do Nothing");
 		SmartDashboard.putData("Auto mode", chooser);
 		prefs = Preferences.getInstance();
 		distanceTarget = prefs.getDouble("DistanceTarget", distanceTarget);
@@ -83,9 +91,14 @@ public class Robot extends IterativeRobot {
 //		server2.setQuality(50);
 //		server2.startAutomaticCapture("cam1");
 		cameraSelector = new SendableChooser();
-		cameraSelector.addDefault("Front View", "Front");
-		cameraSelector.addObject("Back View", "Back");
+		cameraSelector.addDefault("Front View", "Front View");
+		cameraSelector.addObject("Back View", "Back View");
 		SmartDashboard.putData("Camera Selector", cameraSelector);
+		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+		sessionfront = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+		sessionback = NIVision.IMAQdxOpenCamera("cam2", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+		currSession = sessionback;
+		NIVision.IMAQdxConfigureGrab(currSession);
 	}
 
 	/**
@@ -116,8 +129,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		// autonomousCommand = (Command) chooser.getSelected();
 
-		String autoSelected = SmartDashboard.getString("Auto Selector",
-				"Default");
+		String autoSelected = (String) chooser.getSelected();
 		switch (autoSelected) {
 		case "Position One":
 		default:
@@ -135,6 +147,9 @@ public class Robot extends IterativeRobot {
 		case "Position Five":
 				autonomousCommand = new AutoTravel(5, -30);
 				break;
+		case "Do Nothing":
+			autonomousCommand = new AutoTravel(0, 0);
+			break;
 		}
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
@@ -181,27 +196,29 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public void updateCamera(){
-		String cameraSelected = SmartDashboard.getString("Camera Selector",
-				"default");
+		
+		
+		String cameraSelected = (String) cameraSelector.getSelected();
+		NIVision.IMAQdxGrab(currSession, frame, 1);
+		CameraServer.getInstance().setImage(frame);
+		
 		if(cameraSelected == lastSelected){
 			return;
 		}
 		switch (cameraSelected) {
-		default:
-		case "Front View":		
-			CameraServer server = CameraServer.getInstance();
-			server.setQuality(50);
-			server.startAutomaticCapture("cam0");
+		case "Front View":
+     		  NIVision.IMAQdxStopAcquisition(currSession);
+     		  currSession = sessionfront;
+	          NIVision.IMAQdxConfigureGrab(currSession);
 			lastSelected = "Front View";
 			break;
+		default:
 		case "Back View":
-			CameraServer server2 = CameraServer.getInstance();			
-			server2.setQuality(50);
-			server2.startAutomaticCapture("cam1");
+    		  NIVision.IMAQdxStopAcquisition(currSession);
+       		  currSession = sessionback;
+       		  NIVision.IMAQdxConfigureGrab(currSession);
 			lastSelected = "Back View";
 			break;
-		
-			//break;
 		}
 	}
 
