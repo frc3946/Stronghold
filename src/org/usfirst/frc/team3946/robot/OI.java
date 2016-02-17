@@ -7,11 +7,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team3946.robot.commands.AutoAim;
-import org.usfirst.frc.team3946.robot.commands.Launch;
 import org.usfirst.frc.team3946.robot.commands.LaunchGroup;
 import org.usfirst.frc.team3946.robot.commands.LowerIntake;
-import org.usfirst.frc.team3946.robot.commands.PosCatForLaunch;
-import org.usfirst.frc.team3946.robot.commands.PosCatForLoad;
 import org.usfirst.frc.team3946.robot.commands.RaiseIntake;
 import org.usfirst.frc.team3946.robot.commands.ReadyForLaunch;
 
@@ -39,12 +36,10 @@ public class OI {
     //Catapult
     	Button launch = new JoystickButton(driveController, XboxController.RightBumper);
     	Button autoAim = new JoystickButton(driveController, XboxController.LeftBumper);
-    	//Button posCatForLaunch = new JoystickButton(driveController, XboxController.B);
     	Button readyForLaunch = new JoystickButton(driveController, XboxController.Back);
     	launch.whenPressed(new LaunchGroup());
     	autoAim.whileHeld(new AutoAim());
     	readyForLaunch.whenPressed(new ReadyForLaunch());
-    	//posCatForLoad.whileActive(new PosCatForLoad());
     		
     //Intake
     	Button lowerIntake = new JoystickButton(driveController, XboxController.B);

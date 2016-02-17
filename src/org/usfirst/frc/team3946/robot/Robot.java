@@ -19,11 +19,9 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -49,18 +47,23 @@ public class Robot extends IterativeRobot {
 	public static Compressor compressor = new Compressor(0);
 	public static Accelerometer accel = new BuiltInAccelerometer();
 	public static ThreadedPi threadedpi = new ThreadedPi();
+	//autonomous chooser
 	Command autonomousCommand;
 	SendableChooser chooser;
-	public static double distanceTarget = 130;
-	public static double distanceOffset = 0;
-	double testPref;
-	public static Preferences prefs;
+	//camera chooser
 	public static SendableChooser cameraSelector;
 	static String lastSelected = "";
 	int currSession;
 	int sessionfront;
 	int sessionback;
 	Image frame;
+	//preferences
+	public static Preferences prefs;
+	public static double distanceTarget = 130;
+	public static double distanceOffset = 0;
+
+
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -68,6 +71,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		driveTrainEncoder.initEncoders();
+		//autonomous chooser
 		chooser = new SendableChooser();
 		chooser.addDefault("Position One", "Position One");
 		chooser.addObject("Position Two", "Position Two");
@@ -76,20 +80,8 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Position Five", "Position Five");
 		chooser.addObject("Do Nothing", "Do Nothing");
 		SmartDashboard.putData("Auto mode", chooser);
-		prefs = Preferences.getInstance();
-		distanceTarget = prefs.getDouble("DistanceTarget", distanceTarget);
-				//prefs.putDouble("DistanceTarget", 130.0);
-		distanceOffset =  prefs.getDouble("DistanceOffset", distanceOffset);
-				//prefs.putDouble("DistanceOffset", 0.0);
-		//testPref =  prefs.getDouble("TestPref", 11110.0);
-		//prefs.putDouble("TestPrefSave", 11110.0);
 		SmartDashboard.putData("LoadPrefNames", new LoadPrefNames());
-//		CameraServer server = CameraServer.getInstance();
-//		server.setQuality(50);
-//		server.startAutomaticCapture("cam0");
-//		CameraServer server2 = CameraServer.getInstance();
-//		server2.setQuality(50);
-//		server2.startAutomaticCapture("cam1");
+		//camera chooser
 		cameraSelector = new SendableChooser();
 		cameraSelector.addDefault("Front View", "Front View");
 		cameraSelector.addObject("Back View", "Back View");
@@ -99,6 +91,10 @@ public class Robot extends IterativeRobot {
 		sessionback = NIVision.IMAQdxOpenCamera("cam2", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
 		currSession = sessionback;
 		NIVision.IMAQdxConfigureGrab(currSession);
+		//preferences
+		prefs = Preferences.getInstance();
+		distanceTarget = prefs.getDouble("DistanceTarget", distanceTarget);
+		distanceOffset =  prefs.getDouble("DistanceOffset", distanceOffset);
 	}
 
 	/**
