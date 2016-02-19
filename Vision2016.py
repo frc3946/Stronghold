@@ -10,7 +10,6 @@ def get_image(): #can be initialized in the function itself, it is fine here.
 
 def process_image(img):
             hsv_image = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-            #hsv_image = cv2.cvtColor(grey_image, cv2.COLOR_GRAY2HSV)
             print 'process image'
             upperhsv = [80, 80, 255]
             lowerhsv = [1, 1, 245]
@@ -22,33 +21,26 @@ def getDistFromCenter():
             showPrint = True
             camera_capture = get_image()
             finalFrame = process_image(camera_capture)
+            #used as a backup mechanism later in the code
             goals_img = finalFrame.copy()
-            img = cv2.imread('image.jpg')
+            
+            #needed at the end of this definition
             GlobalWidth = 640
             GlobalHeight = 480
-
-            #if showPrint: cv2.imshow('original_img', finalFrame)
-            resize = False
-            if resize: 
-                    img = cv2.resize(img, (GlobalWidth/2,GlobalHeight/2))
-                    GlobalWidth = GlobalWidth/2
-                    GlobalHeight = GlobalHeight/2
-            #blue_only = processor.get_blue_hue(img)
-            #goals_img = blue_only.copy()
-            #NameError could be prepared_frame
-            #cv2.imshow('something', finalFrame)
+            #finds the particles in the image and saves it
             _, contours, _ = cv2.findContours(finalFrame, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
             os.system('clear')
             area = 0
             idx = -1
-            #i = 0          
+                     
             #print 'string' , contours
+            #loops over each contour in the photo to decide which one is our goal
             for i,cnt in enumerate(contours):
-                    print 'inside'
+                    #contour area was rescorded from NI Vision Assistant
                     if (3000 < cv2.contourArea(cnt) < 10000):
                             rect = cv2.convexHull(cnt)
                             minRect = cv2.minAreaRect(rect)
-                            #print cnt
+                            
 
                             
                             x1 = int(minRect[0][0])
@@ -74,9 +66,8 @@ def getDistFromCenter():
                                     ratio = 0
 
                             if showPrint: print 'ratio', ratio
-
+                            #ratio determined above, run the code to find the ratio of the object needed
                             if ((1.6 < ratio < 2.0)): #or (0.25 < ratio < 0.37)):
-                                    print 'got it'
 
                                     if showPrint: print 'winning ratio:', ratio
 
@@ -192,7 +183,7 @@ if __name__ == '__main__':
                                             if ('G' in recvd):
                                                         #if the pictures are not coming out as desired, ramp_frames
                                                         #will provide the number of frames to discard prior to the actual frame used.
-                                                        #runs the capture image thing
+                                                        #runs the capture image process
                                                         camera_capture = get_image()
                                                         #write image to a file
                                                         #file= "E:\img.jpg"
@@ -202,8 +193,7 @@ if __name__ == '__main__':
                                                         #cv2.imshow('test', camera_capture)
                                                         #cv2.waitKey(1)
                                                         finalFrame = process_image(camera_capture)
-                                                        
-                                                        #print 'imshow'
+                                                
                                                         cv2.imshow('pic', finalFrame)
                                                         cv2.waitKey(1)
                                                         result, img = getDistFromCenter()
