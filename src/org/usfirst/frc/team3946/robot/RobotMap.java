@@ -27,7 +27,7 @@ public class RobotMap {
 	//Analog In
 	public static int gyro = 1;
 	
-	//Solenoids
+	//Solenoids 
 	public static int xIntake = 0;
 	public static int pIntake = 1;
 	public static int xLatch = 2;

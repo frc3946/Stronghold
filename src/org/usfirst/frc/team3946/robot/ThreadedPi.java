@@ -22,7 +22,7 @@ import java.net.Socket;
  */
 public class ThreadedPi {
     
-    private String url = "10.29.46.10";
+    private String url = "10.39.46.10";
     private int bufferSize = 64;
     private char delimiter = ',';
     
