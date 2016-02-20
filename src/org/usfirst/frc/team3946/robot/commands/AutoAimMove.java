@@ -44,7 +44,7 @@ public class AutoAimMove extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		if (Math.abs(distanceToTravel) < .25) {
+		if (Math.abs(distanceToTravel) < 3) {
 			return true;
 		} else {
 			return false;

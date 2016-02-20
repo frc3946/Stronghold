@@ -3,8 +3,10 @@ package org.usfirst.frc.team3946.robot.subsystems;
 
 import org.usfirst.frc.team3946.robot.RobotMap;
 import org.usfirst.frc.team3946.robot.commands.ArcadeDrive;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -35,6 +37,20 @@ public class Drivetrain extends Subsystem {
     	fLeft.set(speedLeft);
     	bRight.set(speedRight);
     	bLeft.set(speedLeft);
+    }
+    
+    public void ReverseDrive(){
+        robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
+        robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
+        robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
+        robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
+    }
+    
+    public void ForwardDrive(){
+        robotDrive.setInvertedMotor(MotorType.kFrontLeft, false);
+        robotDrive.setInvertedMotor(MotorType.kFrontRight, false);
+        robotDrive.setInvertedMotor(MotorType.kRearLeft, false);
+        robotDrive.setInvertedMotor(MotorType.kRearLeft, false);
     }
     
 }

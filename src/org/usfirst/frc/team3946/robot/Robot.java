@@ -1,7 +1,11 @@
 package org.usfirst.frc.team3946.robot;
 
+import libraries.XboxController;
+
+import org.usfirst.frc.team3946.robot.commands.ArcadeDrive;
 import org.usfirst.frc.team3946.robot.commands.AutoTravel;
 import org.usfirst.frc.team3946.robot.commands.LoadPrefNames;
+import org.usfirst.frc.team3946.robot.commands.TankDrive;
 import org.usfirst.frc.team3946.robot.subsystems.BallPickup;
 import org.usfirst.frc.team3946.robot.subsystems.CatapultPositioner;
 import org.usfirst.frc.team3946.robot.subsystems.DriveTrainEncoder;
@@ -17,7 +21,9 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -53,15 +59,27 @@ public class Robot extends IterativeRobot {
 	//camera chooser
 	public static SendableChooser cameraSelector;
 	static String lastSelected = "";
-	int currSession;
-	int sessionfront;
-	int sessionback;
+	static int currSession;
+	static int sessionfront;
+	static int sessionback;
 	Image frame;
+	//drivetrain chooser
+	public static SendableChooser drivetrainSelector;
+	static String lastDTSelected = "";
+	Command driveType;
+	int currDriver;
 	//preferences
 	public static Preferences prefs;
 	public static double distanceTarget = 130;
 	public static double distanceOffset = 0;
-
+	public static double angleMultiplier = 1;
+	public static double angleAddition = 0;
+	public static double distanceMultiplier = 1;
+	public static double distanceAddition = 0;
+	public static double leftInches = 0;
+	public static double rightInches = 0;
+	public static double leftTicks = 0;
+	public static double rightTicks = 0;
 
 
 	/**
@@ -85,17 +103,31 @@ public class Robot extends IterativeRobot {
 		cameraSelector = new SendableChooser();
 		cameraSelector.addDefault("Front View", "Front View");
 		cameraSelector.addObject("Back View", "Back View");
+		cameraSelector.addObject("Manual Change", "Manual Change");
 		SmartDashboard.putData("Camera Selector", cameraSelector);
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 		sessionfront = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
 		sessionback = NIVision.IMAQdxOpenCamera("cam2", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
 		currSession = sessionback;
 		NIVision.IMAQdxConfigureGrab(currSession);
+		//drivetrain chooser
+		drivetrainSelector = new SendableChooser();
+		drivetrainSelector.addDefault("Tank Drive", "Tank Drive");
+		drivetrainSelector.addObject("Arcade Drive", "Arcade Drive");
+		SmartDashboard.putData("Drivetrain Selector", drivetrainSelector);
 		//preferences
 		prefs = Preferences.getInstance();
 		distanceTarget = prefs.getDouble("DistanceTarget", distanceTarget);
 		distanceOffset =  prefs.getDouble("DistanceOffset", distanceOffset);
-	}
+		angleMultiplier = prefs.getDouble("AngleMultipler", angleMultiplier);
+		angleAddition = prefs.getDouble("AngleAddition", angleAddition);
+		distanceMultiplier = prefs.getDouble("DistanceMultipler", distanceMultiplier);
+		distanceAddition = prefs.getDouble("DistanceAddition", distanceAddition);
+		leftInches = prefs.getDouble("lWheelInches", leftInches);
+		rightInches = prefs.getDouble("fRightInches", rightInches);
+		leftTicks = prefs.getDouble("lWheelTicks", leftTicks);
+		rightTicks = prefs.getDouble("rWheelTicks", rightTicks);
+		}
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -206,6 +238,7 @@ public class Robot extends IterativeRobot {
      		  NIVision.IMAQdxStopAcquisition(currSession);
      		  currSession = sessionfront;
 	          NIVision.IMAQdxConfigureGrab(currSession);
+	          Robot.drivetrain.ForwardDrive();
 			lastSelected = "Front View";
 			break;
 		default:
@@ -213,7 +246,53 @@ public class Robot extends IterativeRobot {
     		  NIVision.IMAQdxStopAcquisition(currSession);
        		  currSession = sessionback;
        		  NIVision.IMAQdxConfigureGrab(currSession);
+       		  Robot.drivetrain.ReverseDrive();
 			lastSelected = "Back View";
+			break;
+		case "Manual Change":
+			break;
+		}
+	}
+	
+	public static void switchDirection(){
+		
+		switch (lastSelected) {
+		case "Front View":
+     		  NIVision.IMAQdxStopAcquisition(currSession);
+     		  currSession = sessionback;
+	          NIVision.IMAQdxConfigureGrab(currSession);
+	          Robot.drivetrain.ReverseDrive();
+			lastSelected = "Back View";
+			break;
+		default:
+		case "Back View":
+    		  NIVision.IMAQdxStopAcquisition(currSession);
+       		  currSession = sessionfront;
+       		  NIVision.IMAQdxConfigureGrab(currSession);
+       		  Robot.drivetrain.ForwardDrive();
+			lastSelected = "Front View";
+			break;
+		case "Manual Change":
+			break;
+		}
+	}
+	
+	public void drivetrainChooser(){
+		String drivetrainSelected = (String) drivetrainSelector.getSelected();
+		if(drivetrainSelected == lastDTSelected){
+			return;
+		}
+		switch (drivetrainSelected) {
+		default:
+		case "Tank Drive":
+			driveType = new TankDrive();
+			driveType.start();
+			lastSelected = "Tank Drive";
+			break;
+		case "Arcade Drive":
+			driveType = new ArcadeDrive();
+			driveType.start();
+			lastSelected = "ArcadeDrive";
 			break;
 		}
 	}

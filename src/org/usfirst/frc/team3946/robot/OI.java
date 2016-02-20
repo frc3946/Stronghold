@@ -11,6 +11,7 @@ import org.usfirst.frc.team3946.robot.commands.LaunchGroup;
 import org.usfirst.frc.team3946.robot.commands.LowerIntake;
 import org.usfirst.frc.team3946.robot.commands.RaiseIntake;
 import org.usfirst.frc.team3946.robot.commands.ReadyForLaunch;
+import org.usfirst.frc.team3946.robot.commands.SwitchDirection;
 
 import libraries.XboxController;
 /**
@@ -21,14 +22,7 @@ public class OI {
 	
 	public XboxController driveController = new XboxController(0);
 	
-//	A - position catapult for launch
-//	B - position catapult for loading
-//	X - lower intake device
-//	Y - raise intake device
-//	LeftBumper
-//	RightBumper - launch ball
-//	LeftTrigger - runs intake wheels out
-//	RightTrigger - runs intake wheels in
+//update button controls
     
     public OI() {
     	driveController.setDeadband(0.2);
@@ -50,6 +44,10 @@ public class OI {
 		raiseIntake.whileActive(new RaiseIntake());
 		ballPickupForward.whileActive(new BallPickupForward());
 		ballPickupReverse.whileActive(new BallPickupReverse());
+		
+	//Driving
+		Button switchDirection = new JoystickButton(driveController, XboxController.A);
+		switchDirection.whenPressed(new SwitchDirection());
     }
 }
 
