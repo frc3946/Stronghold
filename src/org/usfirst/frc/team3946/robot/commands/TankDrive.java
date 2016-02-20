@@ -25,8 +25,11 @@ public class TankDrive extends Command {
     	double rightStick = Robot.oi.driveController.getRightStickY();
     	Robot.drivetrain.Drive(leftStick, rightStick);
     	
-    	SmartDashboard.putNumber("Actual Right Speed", Robot.driveTrainEncoder.getRate());
-    	SmartDashboard.putNumber("Actual Right Distance", Robot.driveTrainEncoder.getDistance());
+    	SmartDashboard.putNumber("Actual Right Speed", Robot.driveTrainEncoder.getRightRate());
+    	SmartDashboard.putNumber("Actual Right Distance", Robot.driveTrainEncoder.getRightDistance());
+    	
+    	SmartDashboard.putNumber("Actual Left Speed", Robot.driveTrainEncoder.getLeftRate());
+    	SmartDashboard.putNumber("Actual Left Distance", Robot.driveTrainEncoder.getLeftDistance());
 
     }
 
