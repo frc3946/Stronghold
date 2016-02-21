@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3946.robot;
 
-import libraries.XboxController;
-
 import org.usfirst.frc.team3946.robot.commands.ArcadeDrive;
 import org.usfirst.frc.team3946.robot.commands.AutoTravel;
 import org.usfirst.frc.team3946.robot.commands.LoadPrefNames;
@@ -21,9 +19,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -107,7 +103,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Camera Selector", cameraSelector);
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 		sessionfront = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-		sessionback = NIVision.IMAQdxOpenCamera("cam2", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+		sessionback = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
 		currSession = sessionback;
 		NIVision.IMAQdxConfigureGrab(currSession);
 		//drivetrain chooser

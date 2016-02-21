@@ -22,7 +22,15 @@ public class OI {
 	
 	public XboxController driveController = new XboxController(0);
 	
-//update button controls
+//X - ball pickup forward
+//Y - raise intake
+//A - switch driving direction
+//B - lower intake
+//LeftBumper - auto aim
+//RightBumper - launch
+//Start - ball pickup reverse
+//Back - ready for launch commandgroup
+
     
     public OI() {
     	driveController.setDeadband(0.2);
@@ -40,7 +48,7 @@ public class OI {
     	Button raiseIntake = new JoystickButton(driveController, XboxController.Y);
     	Button ballPickupForward = new JoystickButton(driveController, XboxController.X);
     	Button ballPickupReverse = new JoystickButton(driveController, XboxController.Start);
-		lowerIntake.whileActive(new LowerIntake());
+		lowerIntake.whileActive(new LowerIntake(2.0)); //time
 		raiseIntake.whileActive(new RaiseIntake());
 		ballPickupForward.whileActive(new BallPickupForward());
 		ballPickupReverse.whileActive(new BallPickupReverse());
