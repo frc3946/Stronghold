@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team3946.robot.commands.AutoAim;
 import org.usfirst.frc.team3946.robot.commands.LaunchGroup;
+import org.usfirst.frc.team3946.robot.commands.LockLatch;
 import org.usfirst.frc.team3946.robot.commands.LowerIntake;
+import org.usfirst.frc.team3946.robot.commands.PosCatForLaunch;
 import org.usfirst.frc.team3946.robot.commands.RaiseIntake;
 import org.usfirst.frc.team3946.robot.commands.ReadyForLaunch;
 import org.usfirst.frc.team3946.robot.commands.SwitchDirection;
@@ -30,7 +32,6 @@ public class OI {
 //RightBumper - launch
 //Start - ball pickup reverse
 //Back - ready for launch commandgroup
-
     
     public OI() {
     	driveController.setDeadband(0.2);
@@ -46,10 +47,14 @@ public class OI {
     //Intake
     	Button lowerIntake = new JoystickButton(driveController, XboxController.B);
     	Button raiseIntake = new JoystickButton(driveController, XboxController.Y);
+    	//Button posCatForLoad = new JoystickButton(driveController, XboxController.B);
+    	//Button lockLatch = new JoystickButton(driveController, XboxController.Y);
     	Button ballPickupForward = new JoystickButton(driveController, XboxController.X);
     	Button ballPickupReverse = new JoystickButton(driveController, XboxController.Start);
-		lowerIntake.whileActive(new LowerIntake(2.0)); //time
+		lowerIntake.whileActive(new LowerIntake(3.0)); //time
 		raiseIntake.whileActive(new RaiseIntake());
+		//posCatForLoad.whenPressed(new PosCatForLaunch(1.0)); //time
+		//lockLatch.whenPressed(new LockLatch(1.0));
 		ballPickupForward.whileActive(new BallPickupForward());
 		ballPickupReverse.whileActive(new BallPickupReverse());
 		

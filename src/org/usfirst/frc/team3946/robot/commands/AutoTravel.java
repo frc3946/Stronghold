@@ -8,10 +8,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoTravel extends CommandGroup {
     
     public  AutoTravel(double distance, double angle) {
-    	
     	addSequential(new DriveStraight(distance));
     	addSequential(new TurnToAngle(angle));
-    	//AutoAim
+    	addSequential(new LowerIntake(3.0));
+    	//addSequential(new BallPickupForward(time));
+    	addSequential(new AutoAim());
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

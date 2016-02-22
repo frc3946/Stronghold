@@ -151,8 +151,6 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
-		// autonomousCommand = (Command) chooser.getSelected();
-
 		String autoSelected = (String) chooser.getSelected();
 		switch (autoSelected) {
 		case "Position One":
