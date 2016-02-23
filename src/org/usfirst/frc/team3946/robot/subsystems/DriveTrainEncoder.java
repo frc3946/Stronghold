@@ -59,6 +59,4 @@ public class DriveTrainEncoder extends Subsystem {
     	leftWheelEncoder.reset();
     	rightWheelEncoder.reset();
     }
-    
-} //end of DriveTrainEncoder class
-
+}

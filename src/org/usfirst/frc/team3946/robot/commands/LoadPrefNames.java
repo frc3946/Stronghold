@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LoadPrefNames extends Command {
 
-    public LoadPrefNames() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    }
+	public LoadPrefNames() {
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+	}
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
+	// Called just before this Command runs the first time
+	protected void initialize() {
 		Robot.prefs.putDouble("DistanceTarget", Robot.distanceTarget);
 		Robot.prefs.putDouble("DistanceOffset", Robot.distanceOffset);
 		Robot.prefs.putDouble("AngleMultiplier", Robot.angleMultiplier);
@@ -26,23 +26,23 @@ public class LoadPrefNames extends Command {
 		Robot.prefs.putDouble("RightInches", Robot.rightInches);
 		Robot.prefs.putDouble("LeftTicks", Robot.leftTicks);
 		Robot.prefs.putDouble("RightTicks", Robot.rightTicks);
-    }
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return true;
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return true;
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }

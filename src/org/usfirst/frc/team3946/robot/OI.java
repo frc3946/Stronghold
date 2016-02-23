@@ -8,9 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team3946.robot.commands.AutoAim;
 import org.usfirst.frc.team3946.robot.commands.LaunchGroup;
-import org.usfirst.frc.team3946.robot.commands.LockLatch;
 import org.usfirst.frc.team3946.robot.commands.LowerIntake;
-import org.usfirst.frc.team3946.robot.commands.PosCatForLaunch;
 import org.usfirst.frc.team3946.robot.commands.RaiseIntake;
 import org.usfirst.frc.team3946.robot.commands.ReadyForLaunch;
 import org.usfirst.frc.team3946.robot.commands.SwitchDirection;
@@ -26,11 +24,11 @@ public class OI {
 	
 //X - ball pickup forward
 //Y - raise intake
-//A - switch driving direction
+//A - ball pickup reverse
 //B - lower intake
 //LeftBumper - auto aim
 //RightBumper - launch
-//Start - ball pickup reverse
+//Start - switch driving direction
 //Back - ready for launch commandgroup
     
     public OI() {
@@ -50,7 +48,7 @@ public class OI {
     	//Button posCatForLoad = new JoystickButton(driveController, XboxController.B);
     	//Button lockLatch = new JoystickButton(driveController, XboxController.Y);
     	Button ballPickupForward = new JoystickButton(driveController, XboxController.X);
-    	Button ballPickupReverse = new JoystickButton(driveController, XboxController.Start);
+    	Button ballPickupReverse = new JoystickButton(driveController, XboxController.A);
 		lowerIntake.whileActive(new LowerIntake(3.0)); //time
 		raiseIntake.whileActive(new RaiseIntake());
 		//posCatForLoad.whenPressed(new PosCatForLaunch(1.0)); //time
@@ -59,7 +57,7 @@ public class OI {
 		ballPickupReverse.whileActive(new BallPickupReverse());
 		
 	//Driving
-		Button switchDirection = new JoystickButton(driveController, XboxController.A);
+		Button switchDirection = new JoystickButton(driveController, XboxController.Start);
 		switchDirection.whenPressed(new SwitchDirection());
     }
 }

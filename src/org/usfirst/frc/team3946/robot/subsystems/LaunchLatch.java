@@ -1,8 +1,10 @@
 package org.usfirst.frc.team3946.robot.subsystems;
 
 import org.usfirst.frc.team3946.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
@@ -15,6 +17,7 @@ public class LaunchLatch extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
+    	LiveWindow.addActuator("Pistons", "Latch",latch);
     }
     
     public void lock() {
@@ -25,4 +28,3 @@ public class LaunchLatch extends Subsystem {
     	latch.set(DoubleSolenoid.Value.kForward);
     }
 }
-

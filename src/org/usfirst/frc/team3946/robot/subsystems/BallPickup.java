@@ -5,7 +5,7 @@ import org.usfirst.frc.team3946.robot.commands.BallPickupStop;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 /**
  *
  */
@@ -18,6 +18,7 @@ public class BallPickup extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new BallPickupStop());
+        LiveWindow.addActuator("Talons", "PickupTalon", ballPickup);
     }
     public void Reverse() {
     	ballPickup.set(-ballPickupSpeed);

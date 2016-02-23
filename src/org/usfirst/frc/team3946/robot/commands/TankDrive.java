@@ -47,13 +47,3 @@ public class TankDrive extends Command {
     protected void interrupted() {
     }
 }
-
-
-
-//public void log() {
-//	SmartDashboard.putBoolean("Low Gear?", slow);
-//	SmartDashboard.putData("Raw Left Encoder", leftEncoder);
-//	SmartDashboard.putData("Raw Right Encoder", rightEncoder);
-//	SmartDashboard.putNumber("Actual Left Speed", leftEncoder.getRate());
-//	SmartDashboard.putNumber("Actual Right Speed", rightEncoder.getRate());
-//}

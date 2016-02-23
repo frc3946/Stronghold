@@ -1,4 +1,5 @@
 package org.usfirst.frc.team3946.robot;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -6,33 +7,33 @@ package org.usfirst.frc.team3946.robot;
  * floating around.
  */
 public class RobotMap {
-    
-	//PWM
+
+	// PWM
 	public static int ballPickupTalon = 1;
-	
-	//CAN
+
+	// CAN
 	public static int fRightDriveTalon = 1;
 	public static int fLeftDriveTalon = 2;
 	public static int bRightDriveTalon = 3;
-	public static int bLeftDriveTalon = 4; 
-	
-	//DIO
+	public static int bLeftDriveTalon = 4;
+
+	// DIO
 	public static int rightWheelEncoderA = 0;
 	public static int rightWheelEncoderB = 1;
-	public static int leftWheelEncoderA = 2;
-	public static int leftWheelEncoderB = 3;
-	
-	//Relay
-	
-	//Analog In
+	public static int leftWheelEncoderA = 8; // moved to 8
+	public static int leftWheelEncoderB = 9; // moved to 9
+
+	// Relay
+
+	// Analog In
 	public static int gyro = 1;
-	
-	//Solenoids 
+
+	// Solenoids
 	public static int xIntake = 0;
 	public static int pIntake = 1;
 	public static int xLatch = 2;
 	public static int pLatch = 3;
 	public static int xCatapult = 4;
 	public static int pCatapult = 5;
-	
+
 }

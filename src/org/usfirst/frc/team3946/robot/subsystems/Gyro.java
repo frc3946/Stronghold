@@ -24,5 +24,4 @@ public class Gyro extends Subsystem {
     public static double getAngle() {
     	return Gyro.getAngle();
     }
-
 }

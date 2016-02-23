@@ -12,7 +12,7 @@ public class AutoAim extends CommandGroup {
     	addSequential(new AutoAimMove(2.0));
     	addSequential(new AutoAimTurn(2.0));
     	addSequential(new AutoAimMove(2.0));
-    	addSequential(new AutoAimFire(2.0));
+    	//addSequential(new AutoAimFire(2.0));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

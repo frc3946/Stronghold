@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
@@ -27,12 +28,14 @@ public class Drivetrain extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new TankDrive());
-        //robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
-        //robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
+        robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
+        robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
+        LiveWindow.addActuator("Drive Motors", "fRight", fRight);
+        LiveWindow.addActuator("Drive Motors", "fLeft", fLeft);
+        LiveWindow.addActuator("Drive Motors", "bRight", bRight);
+        LiveWindow.addActuator("Drive Motors", "bLeft", bLeft);
         }
-   
-    	
-    
+      
     public void Drive(double speedLeft, double speedRight){
     	fRight.set(speedRight);
     	fLeft.set(speedLeft);
@@ -44,14 +47,13 @@ public class Drivetrain extends Subsystem {
         robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
         robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
         robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
-        robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
+        robotDrive.setInvertedMotor(MotorType.kRearRight, true);
     }
     
     public void ForwardDrive(){
         robotDrive.setInvertedMotor(MotorType.kFrontLeft, false);
         robotDrive.setInvertedMotor(MotorType.kFrontRight, false);
-        robotDrive.setInvertedMotor(MotorType.kRearLeft, false);
+        robotDrive.setInvertedMotor(MotorType.kRearRight, false);
         robotDrive.setInvertedMotor(MotorType.kRearLeft, false);
     }
-    
 }

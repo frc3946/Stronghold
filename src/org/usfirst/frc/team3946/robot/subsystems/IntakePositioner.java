@@ -5,6 +5,7 @@ import org.usfirst.frc.team3946.robot.commands.StopIntakeMovement;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
@@ -19,6 +20,7 @@ public class IntakePositioner extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new StopIntakeMovement());
+        LiveWindow.addActuator("Pistons", "Intake", intake);
     }
     
     public void raiseIntake() {
@@ -33,4 +35,3 @@ public class IntakePositioner extends Subsystem {
     	intake.set(DoubleSolenoid.Value.kOff);
     }
 }
-
