@@ -2,7 +2,7 @@ package org.usfirst.frc.team3946.robot.subsystems;
 
 import org.usfirst.frc.team3946.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class CatapultPositioner extends Subsystem {
     
-	private final DoubleSolenoid catapult = new DoubleSolenoid(RobotMap.xCatapult, RobotMap.pCatapult);
+	public final Solenoid catapult = new Solenoid(RobotMap.catapult);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -22,10 +22,10 @@ public class CatapultPositioner extends Subsystem {
     }
     
     public void launchReady() {
-    	catapult.set(DoubleSolenoid.Value.kReverse);
+    	catapult.set(true);
     }
     
     public void loadReady() {
-    	catapult.set(DoubleSolenoid.Value.kForward);   	
+    	catapult.set(false);   	
     }
 }

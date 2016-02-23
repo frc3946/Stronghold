@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team3946.robot.commands.AutoAim;
+import org.usfirst.frc.team3946.robot.commands.Launch;
 import org.usfirst.frc.team3946.robot.commands.LaunchGroup;
+import org.usfirst.frc.team3946.robot.commands.LockLatch;
 import org.usfirst.frc.team3946.robot.commands.LowerIntake;
 import org.usfirst.frc.team3946.robot.commands.RaiseIntake;
 import org.usfirst.frc.team3946.robot.commands.ReadyForLaunch;
@@ -38,7 +40,7 @@ public class OI {
     	Button launch = new JoystickButton(driveController, XboxController.RightBumper);
     	Button autoAim = new JoystickButton(driveController, XboxController.LeftBumper);
     	Button readyForLaunch = new JoystickButton(driveController, XboxController.Back);
-    	launch.whenPressed(new LaunchGroup());
+    	launch.whenPressed(new Launch(1.0));
     	autoAim.whileHeld(new AutoAim());
     	readyForLaunch.whenPressed(new ReadyForLaunch());
     		

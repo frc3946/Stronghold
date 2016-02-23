@@ -31,9 +31,11 @@ public class RobotMap {
 	// Solenoids
 	public static int xIntake = 0;
 	public static int pIntake = 1;
-	public static int xLatch = 2;
-	public static int pLatch = 3;
-	public static int xCatapult = 4;
-	public static int pCatapult = 5;
+//	public static int xLatch = 2;
+//	public static int pLatch = 3;
+//	public static int xCatapult = 4;
+//	public static int pCatapult = 5;
+	public static int latch = 2;
+	public static int catapult = 3;
 
 }
