@@ -26,7 +26,6 @@ public class Drivetrain extends Subsystem {
     public RobotDrive robotDrive = new RobotDrive(fLeft, bLeft, fRight, bRight);
    
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
         setDefaultCommand(new TankDrive());
         robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
         robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
@@ -34,7 +33,7 @@ public class Drivetrain extends Subsystem {
         LiveWindow.addActuator("Drive Motors", "fLeft", fLeft);
         LiveWindow.addActuator("Drive Motors", "bRight", bRight);
         LiveWindow.addActuator("Drive Motors", "bLeft", bLeft);
-        }
+    }
       
     public void Drive(double speedLeft, double speedRight){
     	fRight.set(speedRight);
