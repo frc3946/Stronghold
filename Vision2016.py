@@ -76,7 +76,7 @@ def getDistFromCenter():
                             if showPrint: print 'ratio', ratio
 
                             if (1.8 < ratio < 2.1) or (.4 < ratio < .8) : 
-                                    print 'got it'
+                                    #print 'got it'
 
                                     if showPrint: print 'winning ratio:', ratio
 
@@ -131,15 +131,15 @@ def getDistFromCenter():
 
                     if (x1 < GlobalWidth/2):
                             dist = -(GlobalWidth/2 - x1)
-                            print ' GO'
+                            #print ' GO'
 
                     elif (x1 > GlobalWidth/2):
                             dist = (GlobalWidth/2 - (GlobalWidth - x1))
-                            print 'go'
+                            #print 'go'
 
                     elif (x1 == GlobalWidth/2):
                             dist = 0
-                            print 'go'
+                            #print 'go'
                             
                     return str(dist) + ',' + str(x1) + ',' + str(y1) + ',' + str(dist_to_wall), goals_img
 
@@ -207,7 +207,7 @@ if __name__ == '__main__':
                                                         #cv2.imshow('pic', finalFrame)
                                                         #cv2.waitKey(1)
                                                         result, img = getDistFromCenter()
-                                                        conn
+                                                        result = conn.send(str(result))
                                                         print 'result', result
                                                         
                                                                                                         
