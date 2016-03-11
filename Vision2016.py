@@ -13,13 +13,13 @@ def process_image(img):
             #hsv_image = cv2.cvtColor(grey_image, cv2.COLOR_GRAY2HSV)
             print 'process image'
             upperhsv = [80, 80, 255]
-            lowerhsv = [1, 1, 245]
+            lowerhsv = [1, 1, 235]
             #filter only white frame and return value
             prepared_frame = cv2.inRange(hsv_image, np.array(lowerhsv), np.array(upperhsv))
             return prepared_frame
 
 def getDistFromCenter():
-            showPrint = True
+            showPrint = False
             camera_capture = get_image()
             finalFrame = process_image(camera_capture)
             goals_img = finalFrame.copy()
@@ -37,7 +37,7 @@ def getDistFromCenter():
             #goals_img = blue_only.copy()
             #NameError could be prepared_frame
             #cv2.imshow('something', finalFrame)
-            _, contours, _ = cv2.findContours(finalFrame, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            contours, _ = cv2.findContours(finalFrame, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
             os.system('clear')
             area = 0
             idx = -1
@@ -45,7 +45,7 @@ def getDistFromCenter():
             #print 'string' , contours
             for i,cnt in enumerate(contours):
                     print 'inside'
-                    if (1000 < cv2.contourArea(cnt) < 8000):
+                    if (1000 < cv2.contourArea(cnt) < 10000):
                             rect = cv2.convexHull(cnt)
                             minRect = cv2.minAreaRect(rect)
                             #print cnt
@@ -88,7 +88,7 @@ def getDistFromCenter():
 
                     if showPrint:		
                             cv2.drawContours(goals_img, contours, idx, (50, 255, 60), 3)
-                            cv2.imshow('rects', goals_img)
+                            #cv2.imshow('rects', goals_img)
                     
                     rect = cv2.convexHull(contours[idx])
 
@@ -125,8 +125,8 @@ def getDistFromCenter():
                     if showPrint: 
                             cv2.circle(goals_img, (x1,y1), 6, (244,255,255))
                             cv2.line(goals_img, (GlobalWidth/2, GlobalHeight), (GlobalWidth/2, 0), (200,200,200)) 
-                            cv2.imshow('rects', goals_img)
-                            cv2.waitKey(1)
+                            #cv2.imshow('rects', goals_img)
+                            #cv2.waitKey(1)
                     dist = 0
 
                     if (x1 < GlobalWidth/2):
@@ -204,9 +204,10 @@ if __name__ == '__main__':
                                                         finalFrame = process_image(camera_capture)
                                                         
                                                         #print 'imshow'
-                                                        cv2.imshow('pic', finalFrame)
-                                                        cv2.waitKey(1)
+                                                        #cv2.imshow('pic', finalFrame)
+                                                        #cv2.waitKey(1)
                                                         result, img = getDistFromCenter()
+                                                        conn
                                                         print 'result', result
                                                         
                                                                                                         
