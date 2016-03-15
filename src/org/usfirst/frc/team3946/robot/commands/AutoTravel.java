@@ -10,7 +10,7 @@ public class AutoTravel extends CommandGroup {
 	public AutoTravel(double distance, double angle) {
 		addSequential(new DriveStraight(distance));
 		addSequential(new TurnToAngle(angle));
-		addSequential(new LowerIntake(3.0));
+		addSequential(new LowerIntake());
 		// addSequential(new BallPickupForward(time));
 		addSequential(new AutoAim());
 		// Add Commands here:

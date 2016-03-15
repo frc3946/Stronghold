@@ -8,9 +8,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ReadyForLaunch extends CommandGroup {
 
 	public ReadyForLaunch() {
-		addSequential(new PosCatForLoad(3.0));
-		addSequential(new LockLatch(1.0));
-		addSequential(new PosCatForLaunch(2.0));
+		
+		addSequential(new PosCatForLoad());
+		addSequential(new LockLatch());
+		addSequential(new PosCatForLaunch());
 		// these will run in order.
 
 		// To run multiple commands at the same time,

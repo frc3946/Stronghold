@@ -12,15 +12,16 @@ public class AutoAimTurn extends Command {
 	double angle;
 	double degreesToGo;
 
-	public AutoAimTurn(double timeout) {
+	public AutoAimTurn() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		angle = Robot.threadedpi.getOffset();
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		Robot.gyro.reset();
+		angle = Robot.threadedpi.getOffset();
+		setTimeout(3);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -36,7 +37,7 @@ public class AutoAimTurn extends Command {
 		if (Math.abs(degreesToGo) <= 1) {
 			return true;
 		} else {
-			return false;
+			return isTimedOut();
 		}
 	}
 

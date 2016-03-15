@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LowerIntake extends Command {
 
-	public LowerIntake(double timeout) {
+	public LowerIntake() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.intakePositioner);

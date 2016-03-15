@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoAim extends CommandGroup {
     
     public  AutoAim() {
-    	addSequential(new AutoAimTurn(2.0));
-    	addSequential(new AutoAimMove(2.0));
-    	addSequential(new AutoAimTurn(2.0));
-    	addSequential(new AutoAimMove(2.0));
+    	addSequential(new AutoAimTurn());
+    	addSequential(new AutoAimMove());
+    	addSequential(new AutoAimTurn());
+    	addSequential(new AutoAimMove());
     	//addSequential(new AutoAimFire(2.0));
         // Add Commands here:
         // e.g. addSequential(new Command1());

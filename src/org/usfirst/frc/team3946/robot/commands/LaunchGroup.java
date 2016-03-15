@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LaunchGroup extends CommandGroup {
     
     public  LaunchGroup() {
-    	addSequential(new LowerIntake(2.0));
-    	addSequential(new Launch(1.0));
-    	addSequential(new PosCatForLoad(3.0));
-        addSequential(new LockLatch(1.0));
-        addSequential(new PosCatForLaunch(2.0));
+    	addSequential(new LowerIntake());
+    	addSequential(new Launch());
+    	addSequential(new PosCatForLoad());
+        addSequential(new LockLatch());
+        addSequential(new PosCatForLaunch());
         //time lower intake
         // Add Commands here:
         // e.g. addSequential(new Command1());

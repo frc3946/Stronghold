@@ -20,11 +20,11 @@ public class LaunchLatch extends Subsystem {
     	LiveWindow.addActuator("Pistons", "Latch", latch);
     }
     
-    public void lock() {
+    public void launch() {
     	latch.set(true);
     }
     
-    public void launch() {
+    public void lock() {
     	latch.set(false);
     }
 }

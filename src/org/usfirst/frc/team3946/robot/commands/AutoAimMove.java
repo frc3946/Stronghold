@@ -15,7 +15,7 @@ public class AutoAimMove extends Command {
 	double distanceToTravel;
 	double currentDistance;
 
-	public AutoAimMove(double timeout) {
+	public AutoAimMove() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.drivetrain);
@@ -23,6 +23,7 @@ public class AutoAimMove extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		setTimeout(3);
 		Robot.gyro.reset();
 		Robot.driveTrainEncoder.resetEncoders();
 		totalDistance = ThreadedPi.getDistance();
@@ -47,7 +48,7 @@ public class AutoAimMove extends Command {
 		if (Math.abs(distanceToTravel) < 3) {
 			return true;
 		} else {
-			return false;
+			return isTimedOut();
 		}
 	}
 
