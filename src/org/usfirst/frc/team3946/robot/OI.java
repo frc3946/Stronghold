@@ -15,7 +15,6 @@ import org.usfirst.frc.team3946.robot.commands.LowerIntake;
 import org.usfirst.frc.team3946.robot.commands.PosCatForLaunch;
 import org.usfirst.frc.team3946.robot.commands.PosCatForLoad;
 import org.usfirst.frc.team3946.robot.commands.RaiseIntake;
-import org.usfirst.frc.team3946.robot.commands.ReadyForLaunch;
 import org.usfirst.frc.team3946.robot.commands.SwitchDirection;
 
 import libraries.XboxController;
@@ -26,11 +25,14 @@ import libraries.XboxController;
 public class OI {
 	
 	public XboxController driveController = new XboxController(0);
-	
-//X - ball pickup forward
+
+//UPDATE LIST
+//RightTrigger - ball pickup forward
+//LeftTrigger - ball pickup reverse
 //Y - raise intake
-//A - ball pickup reverse
 //B - lower intake
+//A - position catapult to launch
+//X - position catapult to load
 //LeftBumper - lock latch
 //RightBumper - launch
 //Start - auto aim
@@ -41,12 +43,12 @@ public class OI {
     	
     //Catapult
     	Button launch = new JoystickButton(driveController, XboxController.RightBumper);
-    	Button autoAim = new JoystickButton(driveController, XboxController.Start);
+    	//Button autoAim = new JoystickButton(driveController, XboxController.Start);
     	Button lockLatch = new JoystickButton(driveController, XboxController.LeftBumper);
     	Button LaunchGroup = new JoystickButton(driveController, XboxController.Back);
     	launch.whenPressed(new Launch());
     	lockLatch.whenPressed(new LockLatch());
-    	autoAim.whenPressed(new AutoAim());
+    	//autoAim.whenPressed(new AutoAim());
     	LaunchGroup.whenPressed(new LaunchGroup());
 
     //Intake
@@ -54,18 +56,14 @@ public class OI {
     	Button raiseIntake = new JoystickButton(driveController, XboxController.Y);
     	Button posCatForLoad = new JoystickButton(driveController, XboxController.X);
     	Button posCatForLaunch = new JoystickButton(driveController, XboxController.A);
-    	Trigger ballPickupForward = new JoystickButton(driveController, XboxController.RightTrigger);
-    	Trigger ballPickupReverse = new JoystickButton(driveController, XboxController.LeftTrigger);
 		lowerIntake.whenPressed(new LowerIntake());
 		raiseIntake.whenPressed(new RaiseIntake());
 		posCatForLoad.whenPressed(new PosCatForLoad());
 		posCatForLaunch.whenPressed(new PosCatForLaunch());
-		ballPickupForward.whileActive(new BallPickupForward());
-		ballPickupReverse.whileActive(new BallPickupReverse());
 		
-	//Driving
-		Button switchDirection = new JoystickButton(driveController, XboxController.Start);
-		switchDirection.whenPressed(new SwitchDirection());
+//	//Driving
+//		Button switchDirection = new JoystickButton(driveController, XboxController.Start);
+//		switchDirection.whenPressed(new SwitchDirection());
     }
 }
 

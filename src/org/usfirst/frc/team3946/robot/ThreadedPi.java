@@ -36,7 +36,7 @@ public class ThreadedPi {
     private boolean m_connected = false;
     
     Thread m_thread;
-    private boolean m_enabled =false;
+    private boolean m_enabled = false;
     private boolean m_run = true;
 
     public static class DataKeeper {

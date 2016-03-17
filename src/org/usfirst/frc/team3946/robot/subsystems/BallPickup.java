@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3946.robot.subsystems;
 
 import org.usfirst.frc.team3946.robot.RobotMap;
-import org.usfirst.frc.team3946.robot.commands.BallPickupStop;
+import org.usfirst.frc.team3946.robot.commands.ControlIntakeMotor;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,7 +17,7 @@ public class BallPickup extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new BallPickupStop());
+        setDefaultCommand(new ControlIntakeMotor());
         LiveWindow.addActuator("Talons", "PickupTalon", ballPickup);
     }
     public void Reverse() {

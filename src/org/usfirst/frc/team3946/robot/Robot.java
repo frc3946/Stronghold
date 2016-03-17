@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3946.robot;
 
+import org.usfirst.frc.team3946.robot.ThreadedPi.DataKeeper;
 import org.usfirst.frc.team3946.robot.commands.ArcadeDrive;
 import org.usfirst.frc.team3946.robot.commands.AutoTravel;
 import org.usfirst.frc.team3946.robot.commands.LoadPrefNames;
@@ -54,12 +55,12 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	SendableChooser chooser;
 	// camera chooser
-//	public static SendableChooser cameraSelector;
-//	static String lastSelected = "";
-//	static int currSession=0;
-//	static int sessionfront=0;
-//	static int sessionback=0;
-//	Image frame;
+	public static SendableChooser cameraSelector;
+	static String lastSelected = "";
+	static int currSession=0;
+	static int sessionfront=0;
+	static int sessionback=0;
+	Image frame;
 	// drivetrain chooser
 	public static SendableChooser drivetrainSelector;
 	static String lastDTSelected = "";
@@ -96,22 +97,22 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		SmartDashboard.putData("LoadPrefNames", new LoadPrefNames());
 		// camera chooser
-//		cameraSelector = new SendableChooser();
-//		cameraSelector.addDefault("Front View", "Front View");
-//		cameraSelector.addObject("Back View", "Back View");
-//		cameraSelector.addObject("Manual Change", "Manual Change");
-//		SmartDashboard.putData("Camera Selector", cameraSelector);
+		cameraSelector = new SendableChooser();
+		cameraSelector.addDefault("Front View", "Front View");
+		cameraSelector.addObject("Back View", "Back View");
+		cameraSelector.addObject("Manual Change", "Manual Change");
+		SmartDashboard.putData("Camera Selector", cameraSelector);
 		
 		
 		
 		try {
-//			frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-//			sessionfront = NIVision.IMAQdxOpenCamera("cam0",
+			frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+//			sessionfront = NIVision.IMAQdxOpenCamera("cam3",
 //					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-//			sessionback = NIVision.IMAQdxOpenCamera("cam1",
-//					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-//			currSession = sessionback;
-//			NIVision.IMAQdxConfigureGrab(currSession);
+			sessionback = NIVision.IMAQdxOpenCamera("cam1",
+					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+			currSession = sessionback;
+			NIVision.IMAQdxConfigureGrab(currSession);
 		} catch (VisionException v) {
 			//do nothing
 		} catch (Exception e) {
@@ -169,19 +170,19 @@ public class Robot extends IterativeRobot {
 		switch (autoSelected) {
 		case "Position One":
 		default:
-			autonomousCommand = new AutoTravel(5, 60);
+			autonomousCommand = new AutoTravel(10, 60);
 			break;
 		case "Position Two":
-			autonomousCommand = new AutoTravel(5, 30);
+			autonomousCommand = new AutoTravel(10, 30);
 			break;
 		case "Position Three":
-			autonomousCommand = new AutoTravel(5, 15);
+			autonomousCommand = new AutoTravel(10, 15);
 			break;
 		case "Position Four":
-			autonomousCommand = new AutoTravel(5, 5);
+			autonomousCommand = new AutoTravel(10, 5);
 			break;
 		case "Position Five":
-			autonomousCommand = new AutoTravel(5, -30);
+			autonomousCommand = new AutoTravel(10, -30);
 			break;
 		case "Do Nothing":
 			autonomousCommand = new AutoTravel(0, 0);
@@ -229,83 +230,83 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Angle",
 				(Math.atan2(Robot.accel.getY(), Robot.accel.getZ()))
 						* (180 / Math.PI));
-//		updateCamera();
+		updateCamera();
 	}
 
-//	public void updateCamera() {
-//		
-//		if (frame == null || currSession == 0)
-//			return;
-//		
-//		String cameraSelected = (String) cameraSelector.getSelected();
-//		NIVision.IMAQdxGrab(currSession, frame, 1);
-//		CameraServer.getInstance().setImage(frame);
-//
-//		if (cameraSelected == lastSelected) {
-//			return;
-//		}
-//		switch (cameraSelected) {
-//		case "Front View":
-//			NIVision.IMAQdxStopAcquisition(currSession);
-//			currSession = sessionfront;
-//			NIVision.IMAQdxConfigureGrab(currSession);
-//			Robot.drivetrain.ForwardDrive();
-//			lastSelected = "Front View";
-//			break;
-//		default:
-//		case "Back View":
-//			NIVision.IMAQdxStopAcquisition(currSession);
-//			currSession = sessionback;
-//			NIVision.IMAQdxConfigureGrab(currSession);
-//			Robot.drivetrain.ReverseDrive();
-//			lastSelected = "Back View";
-//			break;
-//		case "Manual Change":
-//			break;
-//		}
-//	}
-//
-//	public static void switchDirection() {
-//		switch (lastSelected) {
-//		case "Front View":
-//			NIVision.IMAQdxStopAcquisition(currSession);
-//			currSession = sessionback;
-//			NIVision.IMAQdxConfigureGrab(currSession);
-//			Robot.drivetrain.ReverseDrive();
-//			lastSelected = "Back View";
-//			break;
-//		default:
-//		case "Back View":
-//			NIVision.IMAQdxStopAcquisition(currSession);
-//			currSession = sessionfront;
-//			NIVision.IMAQdxConfigureGrab(currSession);
-//			Robot.drivetrain.ForwardDrive();
-//			lastSelected = "Front View";
-//			break;
-//		case "Manual Change":
-//			break;
-//		}
-//	}
-//
-//	public void drivetrainChooser() {
-//		String drivetrainSelected = (String) drivetrainSelector.getSelected();
-//		if (drivetrainSelected == lastDTSelected) {
-//			return;
-//		}
-//		switch (drivetrainSelected) {
-//		default:
-//		case "Tank Drive":
-//			driveType = new TankDrive();
-//			driveType.start();
-//			lastSelected = "Tank Drive";
-//			break;
-//		case "Arcade Drive":
-//			driveType = new ArcadeDrive();
-//			driveType.start();
-//			lastSelected = "ArcadeDrive";
-//			break;
-//		}
-//	}
+	public void updateCamera() {
+		
+		if (frame == null || currSession == 0)
+			return;
+		
+		String cameraSelected = (String) cameraSelector.getSelected();
+		NIVision.IMAQdxGrab(currSession, frame, 1);
+		CameraServer.getInstance().setImage(frame);
+
+		if (cameraSelected == lastSelected) {
+			return;
+		}
+		switch (cameraSelected) {
+		case "Front View":
+			NIVision.IMAQdxStopAcquisition(currSession);
+			currSession = sessionfront;
+			NIVision.IMAQdxConfigureGrab(currSession);
+			Robot.drivetrain.ForwardDrive();
+			lastSelected = "Front View";
+			break;
+		default:
+		case "Back View":
+			NIVision.IMAQdxStopAcquisition(currSession);
+			currSession = sessionback;
+			NIVision.IMAQdxConfigureGrab(currSession);
+			Robot.drivetrain.ReverseDrive();
+			lastSelected = "Back View";
+			break;
+		case "Manual Change":
+			break;
+		}
+	}
+
+	public static void switchDirection() {
+		switch (lastSelected) {
+		case "Front View":
+			NIVision.IMAQdxStopAcquisition(currSession);
+			currSession = sessionback;
+			NIVision.IMAQdxConfigureGrab(currSession);
+			Robot.drivetrain.ReverseDrive();
+			lastSelected = "Back View";
+			break;
+		default:
+		case "Back View":
+			NIVision.IMAQdxStopAcquisition(currSession);
+			currSession = sessionfront;
+			NIVision.IMAQdxConfigureGrab(currSession);
+			Robot.drivetrain.ForwardDrive();
+			lastSelected = "Front View";
+			break;
+		case "Manual Change":
+			break;
+		}
+	}
+
+	public void drivetrainChooser() {
+		String drivetrainSelected = (String) drivetrainSelector.getSelected();
+		if (drivetrainSelected == lastDTSelected) {
+			return;
+		}
+		switch (drivetrainSelected) {
+		default:
+		case "Tank Drive":
+			driveType = new TankDrive();
+			driveType.start();
+			lastSelected = "Tank Drive";
+			break;
+		case "Arcade Drive":
+			driveType = new ArcadeDrive();
+			driveType.start();
+			lastSelected = "ArcadeDrive";
+			break;
+		}
+	}
 
 	public void testPeriodic() {
 		LiveWindow.run();
