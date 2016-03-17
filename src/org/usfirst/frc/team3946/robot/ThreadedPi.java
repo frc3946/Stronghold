@@ -102,7 +102,7 @@ public class ThreadedPi {
                                 report = false;
                             } else {
                                 try {
-                                    distance = Integer.parseInt(data[1]); //Get data
+                                    distance = Integer.parseInt(data[4]); //Get data
                                     offset = Integer.parseInt(data[0]);
                                 } catch(NumberFormatException ex) {
                                     report = false;
@@ -236,7 +236,7 @@ public class ThreadedPi {
             m_rawData = ""; //String to transfer received data to
             System.out.println("Raw Data: "+m_receivedData.length);
             for (int i = 0; i < m_receivedData.length; i++) {
-                m_rawData += (char) m_receivedData[i]; //Cast bytes to chars and concatinate them to the String
+                m_rawData += (char) m_receivedData[i]; //Cast bytes to chars and concatenate them to the String
             }
             System.out.println(m_rawData);
             return m_rawData;

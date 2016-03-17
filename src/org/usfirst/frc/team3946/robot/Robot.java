@@ -107,8 +107,13 @@ public class Robot extends IterativeRobot {
 		
 		try {
 			frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+<<<<<<< HEAD
 //			sessionfront = NIVision.IMAQdxOpenCamera("cam3",
 //					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+=======
+			sessionfront = NIVision.IMAQdxOpenCamera("cam0",
+					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+>>>>>>> ad5eb61140c92d5fe234264555de863953344b49
 			sessionback = NIVision.IMAQdxOpenCamera("cam1",
 					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
 			currSession = sessionback;
