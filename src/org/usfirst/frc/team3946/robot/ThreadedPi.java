@@ -45,8 +45,8 @@ public class ThreadedPi {
         private static double m_time = 0;
         private static boolean m_report = false;
         
-        public static synchronized void setReport(boolean report) {
-            m_report = report;
+        public static synchronized void setReport(boolean m_connected) {
+            m_report = m_connected;
             SmartDashboard.putBoolean("PiReport", m_report);
         }
         
@@ -84,6 +84,7 @@ public class ThreadedPi {
         public int offset;
         public double time;
         private boolean report;
+        private boolean connected = false;
     
         public RaspberryPiThread(ThreadedPi raspberryPi) {
             super("PiSocket");
@@ -102,8 +103,9 @@ public class ThreadedPi {
                                 report = false;
                             } else {
                                 try {
-                                    distance = Integer.parseInt(data[4]); //Get data
+                                    distance = Integer.parseInt(data[3]); //Get data
                                     offset = Integer.parseInt(data[0]);
+                                    report = true;
                                 } catch(NumberFormatException ex) {
                                     report = false;
                                 }
@@ -111,7 +113,7 @@ public class ThreadedPi {
                         } catch (IOException ex) {
                             report = false;
                         }
-                        DataKeeper.setReport(report);
+                        DataKeeper.setReport(m_connected);
                                 
                         if(report) { //Store Data in DataKeeper
                             DataKeeper.setDistance(distance);
@@ -122,7 +124,8 @@ public class ThreadedPi {
                         try {
                             m_raspberryPi.connect();
                         } catch (IOException ex) {
-                            DataKeeper.setReport(false);
+                        	m_connected = false;
+                            DataKeeper.setReport(m_connected);
                         }
                     }
                 }
@@ -149,7 +152,7 @@ public class ThreadedPi {
     public synchronized void connect() throws IOException {
         m_socket =  new Socket();
         InetSocketAddress  socketAddr = new  InetSocketAddress (url, 10000); 
-        m_socket.connect(socketAddr, 0);
+        m_socket.connect(socketAddr, 10);
         //(SocketConnection) Connector.open(url);//, Connector.READ_WRITE, true);
         m_is = m_socket.getInputStream();
         m_os = m_socket.getOutputStream();
