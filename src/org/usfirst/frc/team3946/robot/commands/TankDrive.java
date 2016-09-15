@@ -21,8 +21,8 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double leftStick = Robot.oi.driveController.getLeftStickY();
-    	double rightStick = Robot.oi.driveController.getRightStickY();
+    	double leftStick = Robot.oi.leftController.getLeftStickY();
+    	double rightStick = Robot.oi.rightController.getLeftStickY();
     	Robot.drivetrain.Drive(leftStick, -rightStick);
     	
     	SmartDashboard.putNumber("Actual Right Speed", Robot.driveTrainEncoder.getRightRate());

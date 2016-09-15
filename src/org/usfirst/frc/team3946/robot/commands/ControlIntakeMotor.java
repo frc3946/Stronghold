@@ -21,8 +21,8 @@ public class ControlIntakeMotor extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double leftTrigger = Robot.oi.driveController.getLeftTrigger();
-    	double rightTrigger = Robot.oi.driveController.getRightTrigger();
+    	double leftTrigger = Robot.oi.leftController.getLeftTrigger();
+    	double rightTrigger = Robot.oi.rightController.getRightTrigger();
     	if (Math.abs(leftTrigger) > .1) {
     		Robot.ballPickup.Reverse();
     	} else if (Math.abs(rightTrigger) > .1) {
